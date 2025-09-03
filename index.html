@@ -239,16 +239,33 @@
     </div>
   </section>
 
-  <section class="footer-vid">
-    <video playsinline muted autoplay loop preload="auto" poster="./assets/images/JBQuik_full-banner.webp">
-      <source src="./assets/videos/JBoil.webm" type="video/webm" />
-      <source src="./assets/videos/JBoil.mp4" type="video/mp4" />
-    </video>
-  </section>
+<section class="footer-vid">
+  <video id="footerVideo" playsinline muted autoplay loop preload="auto"
+         poster="./assets/images/JBQuik_banner.webp">
+    <source src="./assets/videos/oil-80.webm" type="video/webm" />
+    <source src="./assets/videos/oil-80.mp4" type="video/mp4" />
+  </video>
+</section>
 
   <footer class="container footer">
     <div>© 2025 JB Quik Oil Co. · Next to Jack’s Car Wash · Huntington Beach, CA</div>
     <div style="margin-top:6px">This is an early preview site. Text, services, and imagery are subject to change.</div>
   </footer>
+  <script>
+  const vid = document.getElementById('footerVideo');
+  let isPausedForDelay = false;
+
+  vid.addEventListener('ended', () => {
+    if (!isPausedForDelay) {
+      isPausedForDelay = true;
+      vid.pause();
+      setTimeout(() => {
+        vid.currentTime = 0;
+        vid.play();
+        isPausedForDelay = false;
+      }, 10000); // 10 seconds pause
+    }
+  });
+</script>
 </body>
 </html>
