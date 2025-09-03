@@ -251,20 +251,15 @@
     <div>© 2025 JB Quik Oil Co. · Next to Jack’s Car Wash · Huntington Beach, CA</div>
     <div style="margin-top:6px">This is an early preview site. Text, services, and imagery are subject to change.</div>
   </footer>
-  <script>
+<script>
   const vid = document.getElementById('footerVideo');
-  let isPausedForDelay = false;
-
   vid.addEventListener('ended', () => {
-    if (!isPausedForDelay) {
-      isPausedForDelay = true;
-      vid.pause();
-      setTimeout(() => {
-        vid.currentTime = 0;
-        vid.play();
-        isPausedForDelay = false;
-      }, 10000); // 10 seconds pause
-    }
+    vid.pause();
+    vid.currentTime = 0;        // Reset to first frame
+    vid.load();                 // Forces video to show the poster image
+    setTimeout(() => {
+      vid.play();
+    }, 10000); // wait 10s, then play again
   });
 </script>
 </body>
