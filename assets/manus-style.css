@@ -1,0 +1,59 @@
+/* manus-style.css — overrides for a more modern, Manus-like look */
+
+/* ---- Fonts ---- */
+body {
+  font-family: "Poppins", "Inter", Arial, sans-serif;
+  color: #222; /* slightly softer black */
+  background-color: #f8f9fb; /* subtle light gray background */
+}
+
+h1, h2, h3, h4 {
+  font-family: "Poppins", "Inter", sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+/* ---- Primary Colors ---- */
+:root {
+  --primary: #0057b7; /* deep blue like Manus header */
+  --secondary: #f4c542; /* warm accent, optional */
+}
+
+/* ---- Buttons ---- */
+button, .btn, .cta-button {
+  background-color: var(--primary);
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover, .btn:hover, .cta-button:hover {
+  background-color: #0045a0;
+  transform: translateY(-2px);
+}
+
+/* ---- Cards / Tiles ---- */
+.card, .service-tile {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover, .service-tile:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+/* ---- Nav & Footer ---- */
+header, nav {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+footer {
+  background-color: #1b1b1b;
+  color: #ddd;
+}
