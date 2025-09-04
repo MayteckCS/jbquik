@@ -154,3 +154,50 @@ h2 { color: #121212 !important; }
 
 /* Ensure any dark-only remnants flip to light */
 .shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important; }
+
+/* --- FIX PACK: force light theme in hero & sections --- */
+
+/* 1) Global base */
+html, body { background:#fff !important; color:#1d1d1d !important; }
+
+/* 2) Hero: kill dark gradient/overlay and switch text to dark */
+section.hero,
+.hero { background: var(--bg) !important; }
+.hero::before,
+.hero::after { content:none !important; background:none !important; }
+.hero .lead, .hero h1, .hero h2, .hero h3, .hero p, .hero a { color:#1d1d1d !important; }
+
+/* Pills in hero */
+.hero .pill {
+  background:#eef4ff !important;
+  border-color:#cfe0ff !important;
+  color:#264d97 !important;
+}
+
+/* 3) Sections: light panels instead of dark */
+section.services,
+section.process,
+section.pricing,
+section.specials,
+section.hours,
+section.contact { background:#f7f8fa !important; }
+
+section.trust,
+section.hero + .container,
+.trust { background:#fff !important; }
+
+/* 4) Cards/borders */
+.card { background:#fff !important; border:1px solid #e5e7eb !important; box-shadow:0 4px 12px rgba(0,0,0,.05) !important; }
+.card.service-card h3 { color:#111 !important; }
+.card.service-card .list, .card.service-card .lead { color:#5f6b7a !important; }
+.card.service-card ul.list { list-style:none; padding-left:0; margin:0 0 10px; }
+.card.service-card ul.list li { padding:4px 0; border:0 !important; }
+
+/* 5) Buttons */
+.btn { background-color:#0056d2 !important; color:#fff !important; border-color:rgba(0,86,210,.25) !important; }
+.btn:hover { background-color:#0047ad !important; transform:translateY(-2px); }
+
+/* 6) Footer video: lighten fade */
+.footer-vid video { filter:brightness(.7) contrast(1.05) saturate(1.05) !important; }
+.footer-vid::after { background:linear-gradient(180deg, rgba(255,255,255,0), #fff) !important; }
+footer.footer { background:#fff !important; color:#4a5568 !important; border-top:1px solid #eaeaea !important; }
