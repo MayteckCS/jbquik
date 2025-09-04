@@ -1,59 +1,74 @@
-/* manus-style.css — overrides for a more modern, Manus-like look */
+/* manus-style.css — true to Manus look */
 
 /* ---- Fonts ---- */
 body {
-  font-family: "Poppins", "Inter", Arial, sans-serif;
-  color: #222; /* slightly softer black */
-  background-color: #f8f9fb; /* subtle light gray background */
-}
-
-h1, h2, h3, h4 {
   font-family: "Poppins", "Inter", sans-serif;
-  font-weight: 700;
-  letter-spacing: -0.5px;
+  color: #222;
+  background-color: #ffffff; /* Manus uses bright white background */
+  line-height: 1.6;
 }
 
-/* ---- Primary Colors ---- */
+/* Headings */
+h1, h2, h3 {
+  font-weight: 700;
+  color: #1d1d1d; /* very dark gray, not pure black */
+}
+
+/* ---- Color Palette ---- */
 :root {
-  --primary: #0057b7; /* deep blue like Manus header */
-  --secondary: #f4c542; /* warm accent, optional */
+  --primary: #0056d2; /* Manus-like bold blue */
+  --secondary: #ffb800; /* warm yellow accent if needed */
+  --bg-light: #ffffff;
+  --bg-section: #f7f8fa; /* soft gray for section backgrounds */
+}
+
+/* ---- Sections ---- */
+section {
+  background-color: var(--bg-section);
+  padding: 3rem 0;
 }
 
 /* ---- Buttons ---- */
 button, .btn, .cta-button {
   background-color: var(--primary);
   color: #fff;
-  border-radius: 8px;
+  border-radius: 6px;
   padding: 0.75rem 1.5rem;
   font-weight: 600;
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover, .btn:hover, .cta-button:hover {
-  background-color: #0045a0;
+  background-color: #0047ad;
   transform: translateY(-2px);
 }
 
-/* ---- Cards / Tiles ---- */
+/* ---- Cards ---- */
 .card, .service-tile {
   background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .card:hover, .service-tile:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
 }
 
-/* ---- Nav & Footer ---- */
+/* ---- Header / Footer ---- */
 header, nav {
-  background-color: var(--primary);
-  color: #fff;
+  background-color: #ffffff;
+  border-bottom: 1px solid #eaeaea;
+}
+
+header a, nav a {
+  color: #1d1d1d;
 }
 
 footer {
-  background-color: #1b1b1b;
-  color: #ddd;
+  background-color: #f7f8fa;
+  color: #333;
+  font-size: 0.9rem;
+  border-top: 1px solid #eaeaea;
 }
