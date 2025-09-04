@@ -1,74 +1,156 @@
-/* manus-style.css — true to Manus look */
 
-/* ---- Fonts ---- */
-body {
-  font-family: "Poppins", "Inter", sans-serif;
-  color: #222;
-  background-color: #ffffff; /* Manus uses bright white background */
+/* manus-style.css — Drop-in visual override to match the bright, modern Manus vibe.
+   Place this file AFTER your existing CSS so it wins the cascade.
+   HTML stays the same — just colors, fonts, and component look are updated. */
+
+/* ----------------------------------------
+   0) Optional fonts (paste these <link>s in <head>)
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+-----------------------------------------*/
+
+/* ----------------------------------------
+   1) Color tokens (override any existing vars)
+-----------------------------------------*/
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f7f8fa;
+  --panel: #ffffff;
+  --text: #1d1d1d;
+  --muted: #5f6b7a;
+  --brand: #0056d2;   /* primary blue */
+  --accent: #0056d2;  /* keep accent aligned for consistency */
+  --ring: rgba(0, 86, 210, 0.25);
+}
+
+/* Base */
+html, body {
+  background: var(--bg) !important;
+  color: var(--text) !important;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
   line-height: 1.6;
 }
 
-/* Headings */
-h1, h2, h3 {
-  font-weight: 700;
-  color: #1d1d1d; /* very dark gray, not pure black */
+/* Links */
+a { color: var(--brand); }
+a:hover { text-decoration: underline; }
+
+/* ----------------------------------------
+   2) Header / Nav
+-----------------------------------------*/
+header.site-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid #eaeaea !important;
+  backdrop-filter: none !important;
+}
+.nav-links a { color: #1d1d1d !important; }
+.nav-links a:hover { color: var(--brand) !important; }
+.brand span { color: #1d1d1d !important; }
+
+/* ----------------------------------------
+   3) Hero
+-----------------------------------------*/
+section.hero {
+  background: linear-gradient(180deg, var(--bg), var(--bg-soft)) !important;
+  padding-top: 40px !important;
+  padding-bottom: 24px !important;
+}
+.hero h1 { color: #111 !important; }
+.lead { color: var(--muted) !important; }
+.pill {
+  border-color: var(--ring) !important;
+  color: #425063 !important;
+  background: rgba(0,86,210,0.06) !important;
 }
 
-/* ---- Color Palette ---- */
-:root {
-  --primary: #0056d2; /* Manus-like bold blue */
-  --secondary: #ffb800; /* warm yellow accent if needed */
-  --bg-light: #ffffff;
-  --bg-section: #f7f8fa; /* soft gray for section backgrounds */
+/* ----------------------------------------
+   4) Cards / Tiles
+-----------------------------------------*/
+.card {
+  background: var(--panel) !important;
+  border: 1px solid #eaeaea !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05) !important;
+}
+.card:hover {
+  box-shadow: 0 10px 24px rgba(0,0,0,0.08) !important;
 }
 
-/* ---- Sections ---- */
-section {
-  background-color: var(--bg-section);
-  padding: 3rem 0;
-}
+/* Service cards with edge-to-edge images already set */
+.card.service-card h3 { color: #121212 !important; }
+.card.service-card .lead,
+.card.service-card .list { color: var(--muted) !important; }
+.card.service-card ul.list { list-style: none; padding-left: 0; margin: 0 0 10px; }
+.card.service-card ul.list li { padding: 4px 0; }
 
-/* ---- Buttons ---- */
-button, .btn, .cta-button {
-  background-color: var(--primary);
-  color: #fff;
-  border-radius: 6px;
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+/* ----------------------------------------
+   5) Buttons
+-----------------------------------------*/
+.btn {
+  border-color: rgba(0,86,210,0.25) !important;
+  background: linear-gradient(180deg, rgba(0,86,210,0.10), rgba(0,86,210,0.08)) !important;
+  color: #fff !important;
+  background-color: var(--brand) !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  transition: transform .2s ease, background-color .2s ease !important;
 }
-
-button:hover, .btn:hover, .cta-button:hover {
-  background-color: #0047ad;
+.btn:hover {
+  background-color: #0047ad !important;
   transform: translateY(-2px);
 }
-
-/* ---- Cards ---- */
-.card, .service-tile {
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.btn.brand {
+  border-color: rgba(0,86,210,0.30) !important;
+  background: linear-gradient(180deg, rgba(0,86,210,0.14), rgba(0,86,210,0.10)) !important;
 }
 
-.card:hover, .service-tile:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+/* ----------------------------------------
+   6) Trust strip (brand logos)
+-----------------------------------------*/
+.trust-logos img {
+  filter: saturate(1) contrast(1.05) brightness(1.05) !important;
+  opacity: .95 !important;
 }
 
-/* ---- Header / Footer ---- */
-header, nav {
-  background-color: #ffffff;
-  border-bottom: 1px solid #eaeaea;
+/* ----------------------------------------
+   7) Sections / Dividers
+-----------------------------------------*/
+section.services,
+section.process,
+section.pricing,
+section.specials,
+section.hours,
+section.contact {
+  background: var(--bg-soft) !important;
+}
+.container { /* keep your existing widths; just soften spacing slightly */
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
-header a, nav a {
-  color: #1d1d1d;
+/* ----------------------------------------
+   8) Footer video band + footer
+-----------------------------------------*/
+.footer-vid video {
+  filter: brightness(0.65) contrast(1.05) saturate(1.05) !important;
+}
+.footer-vid::after {
+  /* fade to light instead of dark */
+  background: linear-gradient(180deg, rgba(255,255,255,0), var(--bg)) !important;
+}
+footer.footer {
+  background: var(--bg) !important;
+  color: #4a5568 !important;
+  border-top: 1px solid #eaeaea !important;
 }
 
-footer {
-  background-color: #f7f8fa;
-  color: #333;
-  font-size: 0.9rem;
-  border-top: 1px solid #eaeaea;
-}
+/* ----------------------------------------
+   9) Small polish
+-----------------------------------------*/
+h2 { color: #121212 !important; }
+.price { color: #111 !important; }
+.mapbox { border-color: #eaeaea !important; background: #fff !important; color: #667085 !important; }
+
+/* Ensure any dark-only remnants flip to light */
+.shadow { box-shadow: 0 10px 30px rgba(0,0,0,0.08) !important; }
