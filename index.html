@@ -2357,5 +2357,31 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
   new MutationObserver(apply).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+<script>
+(() => {
+  const GRAY = '#CBCAC9';
+
+  const tintVisitBand = () => {
+    const card = document.querySelector('#visit-card');
+    if (!card) return;
+
+    // climb to the first wide ancestor (the full-width band) and gray it
+    let el = card.parentElement;
+    while (el) {
+      const w = el.getBoundingClientRect().width;
+      const bg = getComputedStyle(el).backgroundColor;
+      const isWhite = bg === 'rgb(255, 255, 255)' || bg === 'rgba(255, 255, 255, 1)';
+      if (w >= innerWidth * 0.9 && isWhite) {  // this is the strip
+        el.style.background = GRAY;
+        break;
+      }
+      el = el.parentElement;
+    }
+  };
+
+  tintVisitBand();
+  new MutationObserver(tintVisitBand).observe(document.body, { childList: true, subtree: true });
+})();
+</script>		
 </body>
 </html>
