@@ -6,3 +6,11 @@
 /* Optional: also tint page margins (outside cards/sections) */
 html, body { background:#f5f7fa; }  /* tweak: #f6f7f9 ~ #eef1f4 */
 
+/* Keep footer logos/images full-color */
+footer img,
+.site-footer img,
+.footer img {
+  filter: none !important;
+  mix-blend-mode: normal !important;
+  opacity: 1 !important;
+}
