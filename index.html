@@ -2297,36 +2297,20 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 
 			};
 			</script>
-
 <script>
-(() => {
-  const GRAY = '#CBCAC9';
-  const apply = () => {
-    // your screenshot shows: section#services.py-16.bg-gray-50
-    document.querySelectorAll('section#services, section.bg-gray-50').forEach(el =>
-      el.style.setProperty('background', GRAY, 'important')
-    );
-  };
-  apply();
-  new MutationObserver(apply).observe(document.body,{childList:true,subtree:true});
-})();
-</script>
-<script>
-(() => {
-  const GRAY = '#CBCAC9';
+document.addEventListener('DOMContentLoaded', () => {
   const ADDRESS = '5841 Warner Ave, Huntington Beach, CA 92649';
-  const JACKS_IMG = 'assets/jcw.webp';             // adjust if needed
+  const JACKS_IMG = 'assets/jcw.webp';
   const JACKS_URL = 'https://jackscarwashhb.com';
 
-  const mapIframe = () => `
+  const map = `
     <div style="position:relative;padding-bottom:56.25%;height:0">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.699051499458!2d-118.02822816307447!3d33.7167354499115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd25d3dd6fe447%3A0x970eac103d19215f!2sQuik%20Lube%20%26%20Oil!5e0!3m2!1sen!2sus!4v1757193356729!5m2!1sen!2sus"
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.699051499458!2d-118.02822816307447!3d33.7167354499115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd25d3dd6fe447%3A0x970eac103d19215f!2sQuik%20Lube%20%26%20Oil!5e0!3m2!1sen!2sus!4v1757193356729!5m2!1sen!2sus"
         style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allowfullscreen
         referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>`;
 
-  const cardHTML = () => `
+  const card = `
   <section id="visit-card" class="container mx-auto px-4 my-8">
     <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
       <div class="grid md:grid-cols-2">
@@ -2340,62 +2324,51 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
             <p class="m-0 text-gray-600"><a href="${JACKS_URL}" target="_blank" class="underline">Next to Jack’s Car Wash</a></p>
           </div>
         </div>
-        <div class="bg-white"><div class="w-full" style="height:300px">${mapIframe()}</div></div>
+        <div class="bg-white"><div class="w-full" style="height:300px">${map}</div></div>
       </div>
     </div>
   </section>`;
 
-  const findDriveThruCard = () =>
-    [...document.querySelectorAll('h1,h2,h3')].find(h => /convenient drive-thru service/i.test(h.textContent||''))?.closest('section') ||
-    [...document.querySelectorAll('h1,h2,h3')].find(h => /convenient drive-thru service/i.test(h.textContent||''))?.parentElement;
-
-  const insertCard = () => {
-    const anchor = findDriveThruCard();
-    if (!anchor) return false;
+  const drive = [...document.querySelectorAll('h1,h2,h3')]
+    .find(h => /convenient drive-thru service/i.test(h.textContent||''))?.closest('section');
+  if (drive) {
     document.getElementById('visit-card')?.remove();
-    anchor.insertAdjacentHTML('afterend', cardHTML());
-    return true;
+    drive.insertAdjacentHTML('afterend', card);
+  }
+});
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const GRAY = '#CBCAC9';
+  const tint = h => {
+    const sec = h && (h.closest('section') || h.parentElement);
+    if (sec) sec.style.background = GRAY;
   };
 
-  const tintBands = () => {
-    document.documentElement.style.background = GRAY;
-    document.body.style.background = GRAY;
+  // Whole page frame
+  document.documentElement.style.background = GRAY;
+  document.body.style.background = GRAY;
 
-    // Services (id or heading)
-    const svc = document.getElementById('services');
-    if (svc) svc.style.background = GRAY;
-    else {
-      const h = [...document.querySelectorAll('h1,h2,h3')].find(x => /our services/i.test(x.textContent||''));
-      (h && (h.closest('section')||h.parentElement))?.style.setProperty('background', GRAY, 'important');
+  // Our Services (has id on your page)
+  const svc = document.getElementById('services');
+  if (svc) svc.style.background = GRAY;
+
+  // Our History + Get In Touch
+  const heads = [...document.querySelectorAll('h1,h2,h3')];
+  tint(heads.find(h => /our history/i.test(h.textContent||'')));
+  tint(heads.find(h => /get in touch/i.test(h.textContent||'')));
+
+  // The band that wraps Jack's card
+  const card = document.getElementById('visit-card');
+  if (card) {
+    let el = card.parentElement;
+    while (el && el !== document.body) {
+      if (el.tagName === 'SECTION') { el.style.background = GRAY; break; }
+      el = el.parentElement;
     }
+  }
+});
+</script>
 
-    // Our History
-    {
-      const h = [...document.querySelectorAll('h1,h2,h3')].find(x => /our history/i.test(x.textContent||''));
-      (h && (h.closest('section')||h.parentElement))?.style.setProperty('background', GRAY, 'important');
-    }
-
-    // Get In Touch
-    {
-      const h = [...document.querySelectorAll('h1,h2,h3')].find(x => /get in touch/i.test(x.textContent||''));
-      (h && (h.closest('section')||h.parentElement))?.style.setProperty('background', GRAY, 'important');
-    }
-
-    // Jack's band (nearest SECTION around the card)
-    const card = document.getElementById('visit-card');
-    if (card) {
-      let el = card.parentElement;
-      while (el && el !== document.body) {
-        if (el.tagName === 'SECTION') { el.style.background = GRAY; break; }
-        el = el.parentElement;
-      }
-    }
-  };
-
-  const run = () => { insertCard(); tintBands(); };
-  run();
-  new MutationObserver(run).observe(document.body, { childList:true, subtree:true });
-})();
-</script>	
 </body>
 </html>
