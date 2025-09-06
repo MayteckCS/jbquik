@@ -11,6 +11,21 @@
   </head>
   <body>
     <div id="root"></div>
+	    <!-- ADD THIS -->
+  <script>
+    const _def = customElements.define.bind(customElements);
+    customElements.define = (name, ctor, opts) => {
+      if (["manus-content-root","make-with-manus","footer-watermark"].includes(name)) {
+        try { _def(name, class extends HTMLElement{}, opts); } catch(e){}
+        return;
+      }
+      return _def(name, ctor, opts);
+    };
+  </script>
+  <style>
+    manus-content-root, make-with-manus, footer-watermark { display:none !important; }
+  </style>
+  <!-- /ADD THIS -->
 		<script>
 (function(){const e=document.createElement("link").relList;if(e&&e.supports&&e.supports("modulepreload"))return;for(const i of document.querySelectorAll('link[rel="modulepreload"]'))l(i);new MutationObserver(i=>{for(const o of i)if(o.type==="childList")for(const r of o.addedNodes)r.tagName==="LINK"&&r.rel==="modulepreload"&&l(r)}).observe(document,{childList:!0,subtree:!0});function n(i){const o={};return i.integrity&&(o.integrity=i.integrity),i.referrerPolicy&&(o.referrerPolicy=i.referrerPolicy),i.crossOrigin==="use-credentials"?o.credentials="include":i.crossOrigin==="anonymous"?o.credentials="omit":o.credentials="same-origin",o}function l(i){if(i.ep)return;i.ep=!0;const o=n(i);fetch(i.href,o)}})();/**
  * @license
