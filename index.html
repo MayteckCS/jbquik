@@ -7,11 +7,6 @@
     <title>J.B. Quik Oil Co. - Oil Changes & More</title>
     <script type="module" crossorigin src="assets/index-C5debIxB.js"></script>
     <link rel="stylesheet" crossorigin href="assets/index-C_QGHLpW.css">
-	  <style>
-  body {
-    background-color: #CBCAC9 !important;
-  }
-</style>
   </head>
 	<body>
     <div id="root"></div>
@@ -2302,11 +2297,12 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 
 			};
 			</script>
+
 		<script>
-document.addEventListener('DOMContentLoaded', () => {
-  const ADDRESS = '5841 Warner Ave, Huntington Beach, CA 92649';
-  const JACKS_IMG = 'assets/jcw.webp';
-  const JACKS_URL = 'https://jackscarwashhb.com';
+(() => {
+  const ADDRESS='5841 Warner Ave, Huntington Beach, CA 92649';
+  const JACKS_IMG='assets/jcw.webp';
+  const JACKS_URL='https://jackscarwashhb.com';
 
   const map = `
     <div style="position:relative;padding-bottom:56.25%;height:0">
@@ -2334,13 +2330,26 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>
   </section>`;
 
-  const drive = [...document.querySelectorAll('h1,h2,h3')]
-    .find(h => /convenient drive-thru service/i.test(h.textContent||''))?.closest('section');
-  if (drive) {
+  const findAnchor = () =>
+    [...document.querySelectorAll('h1,h2,h3')]
+      .find(h => (h.textContent||'').toLowerCase().replace(/[–—-]/g,'-')
+        .includes('convenient drive-thru service'))
+      ?.closest('section');
+
+  const insert = () => {
+    const anchor = findAnchor();
+    if (!anchor) return false;
     document.getElementById('visit-card')?.remove();
-    drive.insertAdjacentHTML('afterend', card);
-  }
-});
+    anchor.insertAdjacentHTML('afterend', card);
+    return true;
+  };
+
+  window.addEventListener('load', () => {
+    let tries = 0;
+    const t = setInterval(() => { if (insert() || ++tries === 10) clearInterval(t); }, 300);
+  });
+})();
 </script>
+
 </body>
 </html>
