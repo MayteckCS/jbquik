@@ -2296,16 +2296,14 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 			${e()}`}handleSetDialogRef(e){e instanceof gl&&(this.dialogRef=e)}}customElements.define("lit-textarea",is);customElements.define("lit-popup",hi);customElements.define("lit-dialog",gl);customElements.define("manus-content-root",K2);customElements.define("make-with-manus",M2);customElements.define("footer-watermark",L2);h2();hs(()=>{new MutationObserver(()=>{document.querySelector("manus-content-root")||document.body.appendChild(document.createElement("manus-content-root"))}).observe(document.body,{childList:!0,subtree:!0})});
 
 			};
-
 			</script>
 <script>
 (() => {
   const ADDRESS = "5841 Warner Ave, Huntington Beach, CA 92649";
-  const JACKS_IMG = "assets/jcw.webp";      // change if needed
+  const JACKS_IMG = "assets/jcw.webp";
   const JACKS_URL = "https://jackscarwashhb.com";
-
-  const MAP = `
-    <div style="position:relative;min-height:300px">
+  const MAP_IFRAME = `
+    <div style="position:relative;padding-bottom:56.25%;height:0">
       <iframe
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.699051499458!2d-118.02822816307447!3d33.7167354499115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd25d3dd6fe447%3A0x970eac103d19215f!2sQuik%20Lube%20%26%20Oil!5e0!3m2!1sen!2sus!4v1757193356729!5m2!1sen!2sus"
         style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allowfullscreen
@@ -2313,35 +2311,38 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
     </div>`;
 
   const CARD = `
-  <section class="container mx-auto px-4 my-8">
-    <div class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
-      <div class="grid md:grid-cols-2">
-        <div class="flex items-center gap-4 p-6">
-          <a href="${JACKS_URL}" target="_blank" rel="noopener" class="shrink-0">
-            <img src="${JACKS_IMG}" alt="Jack's Self Serve Car Wash" class="w-24 h-auto">
+  <section id="visit-card" style="max-width:1100px;margin:32px auto;padding:0 16px">
+    <div style="background:#fff;border:1px solid #e5e7eb;border-radius:16px;box-shadow:0 1px 2px rgba(0,0,0,.06);overflow:hidden">
+      <div style="display:grid;grid-template-columns:1fr 1fr">
+        <div style="display:flex;align-items:center;gap:16px;padding:24px">
+          <a href="${JACKS_URL}" target="_blank" rel="noopener" style="flex:0 0 auto">
+            <img src="${JACKS_IMG}" alt="Jack's Self Serve Car Wash" style="width:120px;height:auto;display:block">
           </a>
           <div>
-            <h3 class="font-extrabold m-0">Visit Us</h3>
-            <p class="m-0">${ADDRESS}</p>
-            <p class="m-0 text-gray-600"><a href="${JACKS_URL}" target="_blank" class="underline">Next to Jack’s Car Wash</a></p>
+            <h3 style="margin:0 0 6px;font:800 20px/1.2 system-ui,-apple-system,Segoe UI,Roboto">Visit Us</h3>
+            <p style="margin:0 0 4px">${ADDRESS}</p>
+            <p style="margin:0;color:#4b5563">
+              <a href="${JACKS_URL}" target="_blank" style="text-decoration:underline">Next to Jack’s Car Wash</a>
+            </p>
           </div>
         </div>
-        <div class="bg-white">${MAP}</div>
+        <div style="background:#fff">${MAP_IFRAME}</div>
       </div>
     </div>
   </section>`;
 
-  // wait for the Drive-Thru heading, then insert AFTER that card
-  const match = t => t.toLowerCase().replace(/[–—-]/g,'-').includes('convenient drive-thru service');
-  const mo = new MutationObserver(() => {
-    const h = [...document.querySelectorAll('h1,h2,h3')].find(x => match(x.textContent));
-    if (!h) return;
+  const place = () => {
+    const h = [...document.querySelectorAll('h1,h2,h3')].find(x => /convenient drive-thru service/i.test(x.textContent||""));
+    if (!h) return false;
+    document.getElementById('visit-card')?.remove();
     (h.closest('section') || h.parentElement).insertAdjacentHTML('afterend', CARD);
-    mo.disconnect();
-  });
-  mo.observe(document.body, { childList: true, subtree: true });
+    return true;
+  };
+  if (!place()) {
+    const mo = new MutationObserver(() => place() && mo.disconnect());
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
 })();
 </script>
-
 </body>
 </html>
