@@ -2344,26 +2344,19 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
   }
 })();
 </script>
-<style>
-  .jbq-band{background:#CBCAC9!important;}
-  .jbq-band > .container{padding-top:24px;padding-bottom:24px;}
-</style>
 <script>
 (() => {
-  const tag = () => {
-    const want = [/our services/i, /our history/i, /get in touch/i];
-    document.querySelectorAll('h1,h2,h3').forEach(h=>{
-      if (want.some(rx=>rx.test(h.textContent||""))) {
-        (h.closest('section')||h.parentElement)?.classList.add('jbq-band');
-      }
-    });
-    document.getElementById('visit-card')?.classList.add('jbq-band'); // the Jack's card band
+  const GRAY = '#CBCAC9';
+  const apply = () => {
+    // your screenshot shows: section#services.py-16.bg-gray-50
+    document.querySelectorAll('section#services, section.bg-gray-50').forEach(el =>
+      el.style.setProperty('background', GRAY, 'important')
+    );
   };
-  tag();
-  new MutationObserver(tag).observe(document.body,{childList:true,subtree:true});
+  apply();
+  new MutationObserver(apply).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
-
 
 </body>
 </html>
