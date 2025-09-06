@@ -2298,5 +2298,39 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 			};
 
 			</script>
+	  <script>
+  // 👉 set these
+  const ADDRESS = "5841 Warner Ave, Huntington Beach, CA 92649";
+  const JACKS_IMG = "assets/jcw.webp"; // update if your path differs
+  const JACKS_URL = "https://jackscarwashhb.com";
+
+  const block = `
+<section style="padding:24px 0">
+  <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:16px;align-items:stretch">
+    <!-- Left: Address + Jack's -->
+    <a href="${JACKS_URL}" target="_blank" rel="noopener"
+       style="display:flex;gap:14px;align-items:center;background:#fff;border:1px solid #e5e7eb;border-radius:12px;padding:16px;text-decoration:none">
+      <img src="${JACKS_IMG}" alt="Jack's Self Serve Car Wash" style="width:72px;height:auto;flex:0 0 auto">
+      <div>
+        <h3 style="margin:0 0 6px;font-weight:800">Visit Us</h3>
+        <p style="margin:0 0 4px">${ADDRESS}</p>
+        <p style="margin:0;color:#374151">Next to Jack’s Car Wash →</p>
+      </div>
+    </a>
+
+    <!-- Right: Map -->
+    <div style="min-height:280px;border:1px solid #e5e7eb;border-radius:12px;overflow:hidden;background:#fff">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3318.699051499458!2d-118.02822816307447!3d33.7167354499115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd25d3dd6fe447%3A0x970eac103d19215f!2sQuik%20Lube%20%26%20Oil!5e0!3m2!1sen!2sus!4v1757193356729!5m2!1sen!2sus"
+              width="100%" height="300" style="border:0" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+  </div>
+</section>`;
+
+  const heads = Array.from(document.querySelectorAll('h1,h2,h3,h4'));
+  const target = heads.find(el => /our history/i.test(el.textContent));
+  (target ? target.parentElement : document.body)
+    .insertAdjacentHTML(target ? 'beforebegin' : 'beforeend', block);
+</script>
 </body>
 </html>
