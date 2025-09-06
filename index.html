@@ -2344,17 +2344,27 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
   }
 })();
 </script>
-		<style id="bgfix">html,body{background:#CBCAC9!important}</style>
-<script>document.head.appendChild(document.getElementById('bgfix'));</script>
 <script>
 (() => {
-  const el = document.createElement('style');
-  el.id = 'bgfix';
-  el.textContent = `html,body{background:#CBCAC9!important}`;
-  const pin = () => document.head.appendChild(el);
-  pin();
-  new MutationObserver(() => { if (!document.head.contains(el)) pin(); })
-    .observe(document.head, { childList: true });
+  const GRAY = '#CBCAC9';
+
+  const apply = () => {
+    // page frame
+    document.documentElement.style.background = GRAY;
+    document.body.style.background = GRAY;
+
+    // soften big white wrappers, but SKIP cards/tiles
+    document.querySelectorAll('main, #root > div, section').forEach(el => {
+      if (el.matches('.rounded-xl,[class*="rounded"],.shadow,[class*="shadow"],.card,[class*="card"]')) return;
+      const bg = getComputedStyle(el).backgroundColor;
+      if (bg === 'rgb(255, 255, 255)' || bg === 'rgba(255, 255, 255, 1)') {
+        el.style.background = GRAY;
+      }
+    });
+  };
+
+  apply();
+  new MutationObserver(apply).observe(document.body, { childList: true, subtree: true });
 })();
 </script>
 
