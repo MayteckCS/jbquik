@@ -13,3 +13,12 @@ li::marker{content:"";}
 
 /* Tailwind utilities that can re-add bullets */
 .list-disc,.list-outside,.prose ul{list-style:none!important; padding-left:0!important;}
+
+/* soften white blocks */
+html,body,.bg-white,.bg-background,.bg-card,.prose,.section,main{
+  background:#f6f7f9 !important;
+}
+
+/* remove bullets (covers Tailwind/prose) */
+.prose ul, ul{ list-style:none !important; padding-left:0 !important; }
+.prose li::marker, li::marker{ content:"" !important; }
