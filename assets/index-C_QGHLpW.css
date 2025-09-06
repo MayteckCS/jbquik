@@ -14,3 +14,16 @@ footer img,
   mix-blend-mode: normal !important;
   opacity: 1 !important;
 }
+
+/* soften whites site-wide */
+:root { --soft:#f6f7f9; }  /* pick your light gray */
+html, body { background: var(--soft) !important; }
+
+/* override common “white” utility backgrounds */
+.bg-white,
+.bg-gray-50,
+.bg-slate-50,
+.bg-neutral-50 {
+  background-color: var(--soft) !important;
+}
+
