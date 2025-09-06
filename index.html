@@ -2346,6 +2346,17 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 </script>
 		<style id="bgfix">html,body{background:#CBCAC9!important}</style>
 <script>document.head.appendChild(document.getElementById('bgfix'));</script>
+<script>
+(() => {
+  const el = document.createElement('style');
+  el.id = 'bgfix';
+  el.textContent = `html,body{background:#CBCAC9!important}`;
+  const pin = () => document.head.appendChild(el);
+  pin();
+  new MutationObserver(() => { if (!document.head.contains(el)) pin(); })
+    .observe(document.head, { childList: true });
+})();
+</script>
 
 </body>
 </html>
