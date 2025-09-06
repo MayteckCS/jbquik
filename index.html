@@ -2345,24 +2345,16 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 })();
 </script>
 <script>
-(()=> {
-  const el = document.createElement('style');
-  el.textContent = `
-    html,body{background:#CBCAC9!important}
-    /* section bands */
-    .bg-gray-50{background:#CBCAC9!important}
-    #services{background:#CBCAC9!important}
-    #visit-card{background:#CBCAC9!important}
-  `;
-  document.head.appendChild(el);
-
-  // also catch “Our History” / “Get In Touch” sections by heading text
-  const paintByHeading = rx => {
-    const h=[...document.querySelectorAll('h1,h2,h3')].find(e=>rx.test(e.textContent||""));
-    if (h) (h.closest('section')||h.parentElement).style.background = '#CBCAC9';
+(() => {
+  const GRAY = '#CBCAC9';
+  const apply = () => {
+    // your screenshot shows: section#services.py-16.bg-gray-50
+    document.querySelectorAll('section#services, section.bg-gray-50').forEach(el =>
+      el.style.setProperty('background', GRAY, 'important')
+    );
   };
-  const run=()=>{ paintByHeading(/our history/i); paintByHeading(/get in touch/i); };
-  run(); new MutationObserver(run).observe(document.body,{childList:true,subtree:true});
+  apply();
+  new MutationObserver(apply).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
 </body>
