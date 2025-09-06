@@ -2344,29 +2344,26 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
   }
 })();
 </script>
+<style>
+  .jbq-band{background:#CBCAC9!important;}
+  .jbq-band > .container{padding-top:24px;padding-bottom:24px;}
+</style>
 <script>
 (() => {
-  const GRAY = '#CBCAC9';
-
-  const apply = () => {
-    // page frame
-    document.documentElement.style.background = GRAY;
-    document.body.style.background = GRAY;
-
-    // soften big white wrappers, but SKIP cards/tiles
-    document.querySelectorAll('main, #root > div, section').forEach(el => {
-      if (el.matches('.rounded-xl,[class*="rounded"],.shadow,[class*="shadow"],.card,[class*="card"]')) return;
-      const bg = getComputedStyle(el).backgroundColor;
-      if (bg === 'rgb(255, 255, 255)' || bg === 'rgba(255, 255, 255, 1)') {
-        el.style.background = GRAY;
+  const tag = () => {
+    const want = [/our services/i, /our history/i, /get in touch/i];
+    document.querySelectorAll('h1,h2,h3').forEach(h=>{
+      if (want.some(rx=>rx.test(h.textContent||""))) {
+        (h.closest('section')||h.parentElement)?.classList.add('jbq-band');
       }
     });
+    document.getElementById('visit-card')?.classList.add('jbq-band'); // the Jack's card band
   };
-
-  apply();
-  new MutationObserver(apply).observe(document.body, { childList: true, subtree: true });
+  tag();
+  new MutationObserver(tag).observe(document.body,{childList:true,subtree:true});
 })();
 </script>
+
 
 </body>
 </html>
