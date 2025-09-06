@@ -8,13 +8,6 @@
     <script type="module" crossorigin src="assets/index-C5debIxB.js"></script>
     <link rel="stylesheet" crossorigin href="assets/index-C_QGHLpW.css">
 	<link rel="stylesheet" href="assets/overrides.css?v=1">
-	  <style>
-/* soften whites */
-html,body,.bg-white,.bg-background,.bg-card{background:#f6f7f9!important}
-/* remove bullets */
-ul,.list-disc{list-style:none!important;padding-left:0!important}
-li::marker{content:""}
-</style>
   </head>
   <body>
     <div id="root"></div>
@@ -2306,5 +2299,11 @@ Not an official Manus doc nor endorsed by Manus. Content may contain inaccuracie
 			};
 
 			</script>
+	  <script>
+  const l=document.createElement('link');
+  l.rel='stylesheet';
+  l.href='assets/overrides.css?v=3'; // cache-bust
+  document.head.appendChild(l);
+</script>
 </body>
 </html>
