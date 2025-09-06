@@ -13,5 +13,3 @@ li::marker{content:"";}
 
 /* Tailwind utilities that can re-add bullets */
 .list-disc,.list-outside,.prose ul{list-style:none!important; padding-left:0!important;}
-
-body{outline:2px solid red !important;}
